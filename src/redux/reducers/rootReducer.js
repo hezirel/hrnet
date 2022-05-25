@@ -1,9 +1,9 @@
 import { 
-    combineReducers
+	combineReducers
 } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
-    //name: name.reducer => Imported from "features/name/nameSlice"
+	action: (state = {}) => state,
 });
 
 
