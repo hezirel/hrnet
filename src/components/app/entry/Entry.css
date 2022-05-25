@@ -1,3 +1,17 @@
-.App {
+.entryView {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  background-color: #110347;
+}
+
+.entryTitle h1 {
+  font-family: "Menlo";
   text-align: center;
+  color: ghostwhite;
+  opacity: 0.8;
+}
+
+.entryForm {
+  background-color: #110347;
 }

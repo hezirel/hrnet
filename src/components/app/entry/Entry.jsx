@@ -6,8 +6,14 @@ import "./Entry.css";
 
 function Entry() {
 	return (
-		<div className="App">
-      HRNET
+		<div className="entryView">
+			<div className="entryTitle">
+				<h1>Add a subject to database</h1>
+			</div>
+			<div className="entryForm">
+			Form
+			</div>
+				
 		</div>
 	);
 }
