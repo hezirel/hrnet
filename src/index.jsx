@@ -8,6 +8,7 @@ import {
 	HashRouter,
 	Routes,
 	Route,
+	Navigate,
 } from "react-router-dom";
 
 import {
@@ -33,8 +34,9 @@ root.render(
 			<Header />
 			<Provider store={store}>
 				<Routes>
-					<Route path="*" element={<Entry />} />
+					<Route path="/" element={<Entry />} />
 					<Route path="data" element={<Data />} />
+					<Route path="*" element={<Navigate replace to="/"/>} />
 				</Routes>
 			</Provider>
 		</HashRouter>
