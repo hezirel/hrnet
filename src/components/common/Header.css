@@ -1,52 +1,12 @@
-.header-main {
-    background-color: white;
-    padding: 0.3rem;
-}
-
-.header-container {
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-    max-height: min-content;
-}
-
-.header-container img {
-    max-height: 6vh;
-    max-width: min-content;
-}
-
-.header-nav {
-    align-self: center;
-}
-
-.header-nav ul {
-    text-align: center;
-}
-
-.header-nav-list {
-    list-style: none;
-    display: inline-flex;
-}
-.header-nav-link {
-    display: inline-flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    padding: .5em;
-    text-decoration: none;
-    color: var(--clr-primary);
-}
-
-@media screen and (min-width: 768px) {
     .header-main {
-        background-color: white;
+        background-color: black;
         padding: 0.3rem 4rem;
     }
     
     .header-container {
         display:flex;
         align-items:center;
-        justify-content:space-between;
+        justify-content:space-around;
         flex-wrap: wrap;
         max-height: min-content;
     }
@@ -59,18 +19,16 @@
         margin: 1em 0 .5em;
         text-align: center;
     }
-    .header-nav li {
-        display: inline;
-    }
     .header-nav-link {
+        text-decoration: none;
         display: inline-block;
         padding: .5em 1.5em;
-        text-decoration: none;
-        color: var(--clr-primary);
+        font-size: larger;
+        color: white;
+        font-family: "Menlo";
     }
     
-}
 
 .active {
-    text-decoration: underline;
+    background-color: #1f2bcc99;
 }

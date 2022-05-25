@@ -18,8 +18,8 @@ import {
 	store
 } from "./redux/store/store";
 
-import Entry from "./app/entry/Entry";
-import Data from "./app/data/Data";
+import Entry from "./components/app/entry/Entry";
+import Data from "./components/app/data/Data";
 
 import "./index.css";
 import Header from "./components/common/Header";
