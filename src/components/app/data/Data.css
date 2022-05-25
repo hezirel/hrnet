@@ -1,3 +1,20 @@
-.App {
+.dataView {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+.dataTitle {
+  background-color: #110347;
+}
+
+.dataTitle h1 {
+  font-family: "Menlo";
   text-align: center;
+  color: ghostwhite;
+  opacity: 0.8;
+}
+
+.dataTable {
+  background-color: #140347f1;
 }

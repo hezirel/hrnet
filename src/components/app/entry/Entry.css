@@ -2,6 +2,9 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
+}
+
+.entryTitle {
   background-color: #110347;
 }
 
@@ -13,5 +16,5 @@
 }
 
 .entryForm {
-  background-color: #110347;
+  background-color: #140347f1;
 }

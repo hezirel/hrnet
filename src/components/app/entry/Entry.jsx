@@ -11,9 +11,10 @@ function Entry() {
 				<h1>Add a subject to database</h1>
 			</div>
 			<div className="entryForm">
-			Form
+				<form onSubmit={(e) => e.preventDefault()}>
+
+				</form>
 			</div>
-				
 		</div>
 	);
 }
