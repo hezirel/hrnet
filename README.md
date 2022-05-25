@@ -4,6 +4,9 @@
 
 This is my 14th and last project towards my JavaScript Developper Diploma
 
+## Original App Repo
+
+Legacy jQuery code for this app can be found [here](https://github.com/OpenClassrooms-Student-Center/P12_Front-end
 
 # Scripts
 
