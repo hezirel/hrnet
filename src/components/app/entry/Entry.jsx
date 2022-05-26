@@ -33,7 +33,14 @@ function Entry() {
 
 					<div>
 						<label htmlFor="first-name">First Name</label>
-						<input type="text" id="first-name" />
+						<input 
+							name="firstName"
+							type="text"
+							id="first-name"
+							minLength={3}
+							maxLength={20}
+							required
+						/>
 					</div>
 
 					<div>
