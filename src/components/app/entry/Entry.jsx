@@ -36,19 +36,25 @@ function Entry() {
 
 					<fieldset className="addressField">
 
-						<legend>Address</legend>
+						<div>
+							<label htmlFor="street">Street</label>
+							<input id="street" type="text" placeholder="123 bis Street Name"/>
+						</div>
 
-						<label htmlFor="street">Street</label>
-						<input id="street" type="text" placeholder="123 bis Street Name"/>
+						<div>
+							<label htmlFor="city">City</label>
+							<input id="city" type="text" placeholder="Gotham City"/>
+						</div>
 
-						<label htmlFor="city">City</label>
-						<input id="city" type="text" placeholder="Gotham City"/>
+						<div>
+							<label htmlFor="state">State</label>
+							<select name="state" id="state" placeholder="NY"></select>
+						</div>
 
-						<label htmlFor="state">State</label>
-						<select name="state" id="state" placeholder="NY"></select>
-
-						<label htmlFor="zip-code">Zip</label>
-						<input id="zip-code" type="number" placeholder="42069"/>
+						<div>
+							<label htmlFor="zip-code">Zip</label>
+							<input id="zip-code" type="number" placeholder="42069"/>
+						</div>
 
 					</fieldset>
 
