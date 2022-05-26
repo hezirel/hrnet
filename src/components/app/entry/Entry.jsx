@@ -2,9 +2,26 @@ import {
 	React,
 } from "react";
 
+import {
+	useDispatch,
+} from "react-redux";
+
+import {
+	addEntry,
+} from "../../../redux/features/inputSlice";
+
 import "./Entry.css";
 
 function Entry() {
+
+	const dispatch = useDispatch();
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		const formData = event.target.elements;
+		dispatch(addEntry(formData.lastName.value));
+	};
+
 	return (
 		<div className="entryView">
 			<div className="entryTitle">
@@ -12,7 +29,7 @@ function Entry() {
 			</div>
 			<div className="entryFormContainer">
 
-				<form className="entryForm" onSubmit={(e) => e.preventDefault()} >
+				<form className="entryForm" onSubmit={handleSubmit} >
 
 					<div>
 						<label htmlFor="first-name">First Name</label>
@@ -20,8 +37,8 @@ function Entry() {
 					</div>
 
 					<div>
-						<label htmlFor="last-name">Last Name</label>
-						<input type="text" id="last-name" />
+						<label htmlFor="lastName">Last Name</label>
+						<input type="text" id="lastName" />
 					</div>
 
 					<div>
