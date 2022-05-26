@@ -10,48 +10,61 @@ function Entry() {
 			<div className="entryTitle">
 				<h1>Add a subject to database</h1>
 			</div>
-			<div className="entryForm">
-				<form onSubmit={(e) => e.preventDefault()} >
+			<div className="entryFormContainer">
 
-					<label htmlFor="first-name">First Name</label>
-					<input type="text" id="first-name" />
+				<form className="entryForm" onSubmit={(e) => e.preventDefault()} >
 
-					<label htmlFor="last-name">Last Name</label>
-					<input type="text" id="last-name" />
+					<div>
+						<label htmlFor="first-name">First Name</label>
+						<input type="text" id="first-name" />
+					</div>
 
-					<label htmlFor="date-of-birth">Date of Birth</label>
-					<input id="date-of-birth" type="text"/>
+					<div>
+						<label htmlFor="last-name">Last Name</label>
+						<input type="text" id="last-name" />
+					</div>
 
-					<label htmlFor="start-date">Start Date</label>
-					<input id="start-date" type="text" />
+					<div>
+						<label htmlFor="date-of-birth">Date of Birth</label>
+						<input id="date-of-birth" type="text"/>
+					</div>
 
-					<fieldset className="address">
+					<div>
+						<label htmlFor="start-date">Start Date</label>
+						<input id="start-date" type="text" />
+					</div>
+
+					<fieldset className="addressField">
 
 						<legend>Address</legend>
 
 						<label htmlFor="street">Street</label>
-						<input id="street" type="text" />
+						<input id="street" type="text" placeholder="123 bis Street Name"/>
 
 						<label htmlFor="city">City</label>
-						<input id="city" type="text" />
+						<input id="city" type="text" placeholder="Gotham City"/>
 
 						<label htmlFor="state">State</label>
-						<select name="state" id="state"></select>
+						<select name="state" id="state" placeholder="NY"></select>
 
-						<label htmlFor="zip-code">Zip Code</label>
-						<input id="zip-code" type="number" />
+						<label htmlFor="zip-code">Zip</label>
+						<input id="zip-code" type="number" placeholder="42069"/>
 
 					</fieldset>
 
-					<label htmlFor="department">Department</label>
-					<select name="department" id="department">
-						<option>Sales</option>
-						<option>Marketing</option>
-						<option>Engineering</option>
-						<option>Human Resources</option>
-						<option>Legal</option>
-					</select>
-					<button onClick="saveEmployee()">Save</button>
+					<div>
+						<label htmlFor="department">Department</label>
+						<select name="department" id="department">
+							<option>Sales</option>
+							<option>Marketing</option>
+							<option>Engineering</option>
+							<option>Human Resources</option>
+							<option>Legal</option>
+						</select>
+					</div>
+					<div>
+						<button type="submit">Save</button>
+					</div>
 				</form>
 			</div>
 		</div>
