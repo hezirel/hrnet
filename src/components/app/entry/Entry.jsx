@@ -12,14 +12,22 @@ import {
 
 import "./Entry.css";
 
+const serialForm = (form) => {
+	const formData = new FormData(form);
+	const serialized = {};
+	for (const [key, value] of formData.entries()) {
+		serialized[key] = value;
+	}
+	return serialized;
+};
+
 function Entry() {
 
 	const dispatch = useDispatch();
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		const formData = event.target.elements;
-		dispatch(addEntry(formData.lastName.value));
+		dispatch(addEntry(serialForm(event.target)));
 	};
 
 	return (
@@ -37,9 +45,10 @@ function Entry() {
 							name="firstName"
 							type="text"
 							id="first-name"
+							placeholder="Mario"
+							defaultValue={"mario"}
 							minLength={3}
 							maxLength={20}
-							required
 						/>
 					</div>
 

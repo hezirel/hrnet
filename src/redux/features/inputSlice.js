@@ -4,6 +4,7 @@ import {
 
 const initialState = {
 	userEntry: false,
+	db: false
 };
 
 const inputSlice = createSlice({
@@ -11,9 +12,10 @@ const inputSlice = createSlice({
 	initialState,
 	reducers: {
 		addEntry: (state, action) => {
-			state.userEntry = action.payload;
+			console.log(action);
+			state.userEntry = true;
 		}
-	}
+	},
 });
 
 export const {
