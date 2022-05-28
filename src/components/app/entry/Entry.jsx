@@ -1,5 +1,6 @@
 import {
 	React,
+	useEffect,
 } from "react";
 
 import {
@@ -29,6 +30,14 @@ function Entry() {
 		event.preventDefault();
 		dispatch(addEntry(serialForm(event.target)));
 	};
+
+	useEffect(() => {
+		dispatch(addEntry({
+			firstName: "Ezio",
+			lastName: "Papagianni",
+			department: "IT",
+		}));
+	}, []);
 
 	return (
 		<div className="entryView">
