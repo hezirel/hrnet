@@ -6,8 +6,20 @@ const initialState = {
 	userForm: false,
 };
 
+const formShape = [
+	"firstName",
+	"lastName",
+	"department",
+	"dateOfBirth",
+	"startDate",
+	"street",
+	"city",
+	"state",
+	"zipCode",
+];
+
 const setupDb = async () => {
-	const req = window.indexedDB.open("hrnet", 1);
+	const req = window.indexedDB.open("hrnet");
 	const p = new Promise((resolve, reject) => {
 		req.onupgradeneeded = (event) => {
 			const db = event.target.result;
@@ -15,19 +27,15 @@ const setupDb = async () => {
 				keyPath: "id",
 				autoIncrement: true
 			});
-			store.createIndex("firstName", "firstName", {
-				unique: false
-			});
-			store.createIndex("lastName", "lastName", {
-				unique: false
-			});
-			store.createIndex("department", "department", {
-				unique: false
+			formShape.forEach((field) => {
+				store.createIndex(field, field, {
+					unique: false
+				});
 			});
 		};
 
-		req.onsuccess = () => {
-			resolve(req.result);
+		req.onsuccess = (e) => {
+			resolve(e.target.result);
 		};
 
 		req.onerror = () => {
@@ -51,7 +59,6 @@ const DbAddEntry = (db, entry) => {
 		db.close();
 	};
 };
-
 
 const inputSlice = createSlice({
 	name: "input",
