@@ -3,8 +3,7 @@ import {
 } from "@reduxjs/toolkit";
 
 const initialState = {
-	userEntry: false,
-	db: false
+	userForm: false,
 };
 
 const inputSlice = createSlice({
@@ -12,8 +11,7 @@ const inputSlice = createSlice({
 	initialState,
 	reducers: {
 		addEntry: (state, action) => {
-			console.log(action);
-			state.userEntry = true;
+			state.userEntry = action.payload;
 		}
 	},
 });

@@ -11,6 +11,7 @@
 .entryTitle h1 {
   font-family: "Menlo";
   text-align: center;
+  font-size: larger;
   color: ghostwhite;
   opacity: 0.8;
 }

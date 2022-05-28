@@ -8,7 +8,6 @@ export const dbApi = createApi({
 	baseQuery: fetchBaseQuery({
 		baseUrl: "/"
 	}),
-	tagTypes: ["DBConnect"],
 	endpoints: (build) => ({
 		DbConnect: build.query({
 			queryFn: () => ({payload: {}}),
