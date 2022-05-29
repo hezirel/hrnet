@@ -14,15 +14,20 @@ import {
 	pageSize
 } from "../../../redux/features/table/tableSlice";
 
+import {
+	useDispatch
+} from "react-redux";
+
 import "./Data.css";
 
 function Data() {
 
 	const size = useSelector((state) => state.table.pageSize);
 	const {data, isError, error} = useDbGetQuery(size);
-	const handleSize = (e) => {
-		pageSize(e.target.value);
-		console.log(e.target.value);
+	const dispatch = useDispatch();
+
+	const handleSize = (event) => {
+		dispatch(pageSize(event.target.value));
 	};
 
 	return (

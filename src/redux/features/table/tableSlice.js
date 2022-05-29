@@ -14,6 +14,7 @@ const tableSlice = createSlice({
 	initialState,
 	reducers: {
 		pageSize: (state, action) => {
+			console.log(state);
 			state.pageSize = action.payload;
 			return state;
 		},
