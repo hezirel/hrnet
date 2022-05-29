@@ -32,7 +32,6 @@ const DbGetEntries = (size, filter) => {
 			const tx = db.transaction("subjects", "readonly");
 			const select = tx.objectStore("subjects");
 			const query = filter.getState().table.filter;
-			console.log(query);
 	
 			const results = [];
 	
@@ -40,9 +39,11 @@ const DbGetEntries = (size, filter) => {
 				const cursor = event.target.result;
 				if (cursor && cursor.value.id < size) {
 					if (query) {
-						if (cursor.value.firstName.includes(query)) {
-							results.push(cursor.value);
-						}
+						Object.values(cursor.value).forEach((value) => {
+							if (value.toString().toLowerCase().includes(query.toLowerCase())) {
+								results.push(cursor.value);
+							}
+						});
 					} else {
 						results.push(cursor.value);
 					}

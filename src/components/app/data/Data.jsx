@@ -33,8 +33,13 @@ function Data() {
 	};
 
 	const handleSearch = (event) => {
-		dispatch(filterSearch(event.target.value));
-		refetch();
+		if (event.target.value.length > 2) {
+			dispatch(filterSearch(event.target.value));
+			refetch();
+		} else {
+			dispatch(filterSearch(false));
+			refetch();
+		}
 	};
 
 	return (
@@ -55,6 +60,7 @@ function Data() {
 				<input 
 					type="text" 
 					placeholder="Search"
+					minLength={3}
 					onChange={handleSearch}
 				/>
 			</div>
