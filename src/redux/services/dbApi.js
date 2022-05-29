@@ -64,7 +64,6 @@ const DbAddEntry = (entry) => {
 
 const DbGetEntries = () => {
 
-
 	const p = new Promise((resolve, reject) => {
 		setupDb().then((db) => {
 			const tx = db.transaction("subjects", "readonly");
@@ -80,7 +79,7 @@ const DbGetEntries = () => {
 				} else {
 					console.log("All entries retrieved");
 					db.close();
-					resolve(results);
+					resolve({data: results});
 				}
 			};
 

@@ -11,7 +11,6 @@ import "./Data.css";
 function Data() {
 
 	const {data, isError, error} = useDbGetQuery();
-	
 
 	return (
 		<div className="dataView">
