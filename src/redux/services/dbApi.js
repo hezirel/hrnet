@@ -62,19 +62,54 @@ const DbAddEntry = (entry) => {
 	});
 };
 
+const DbGetEntries = () => {
+
+
+	const p = new Promise((resolve, reject) => {
+		setupDb().then((db) => {
+			const tx = db.transaction("subjects", "readonly");
+			const select = tx.objectStore("subjects");
+	
+			const results = [];
+	
+			select.openCursor().onsuccess = (event) => {
+				const cursor = event.target.result;
+				if (cursor) {
+					results.push(cursor.value);
+					cursor.continue();
+				} else {
+					console.log("All entries retrieved");
+					db.close();
+					resolve(results);
+				}
+			};
+
+			select.onerror = (event) => {
+				console.warn("Error retrieving entries", event);
+				reject();
+			};
+		});
+	});
+	return p;
+};
+
 export const dbApi = createApi({
 	reducerPath: "services/dbApi",
 	endpoints: (build) => ({
 		DbInsert: build.mutation({
 			queryFn: (payload) => {
 				DbAddEntry(payload);
-			},
+			}
+		}),
+		DbGet: build.query({
+			queryFn: DbGetEntries,
 		}),
 	})
 });
 
 export const {
 	useDbInsertMutation,
+	useDbGetQuery,
 } = dbApi;
 
 export default dbApi;

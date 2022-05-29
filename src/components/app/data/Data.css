@@ -12,9 +12,36 @@
   font-family: "Menlo";
   text-align: center;
   color: ghostwhite;
+  font-size: larger;
   opacity: 0.8;
 }
 
 .dataTable {
   background-color: #140347f1;
+  padding: 1rem 2rem;
+}
+
+.dataTable table {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.8fr 1fr;
+  justify-content: center;
+  align-items: center;
+}
+
+th {
+  font-family: "Menlo";
+  font-size: larger;
+  color: ghostwhite;
+  opacity: 0.8;
+  border: 1px solid ghostwhite;
+  padding: 0.5rem;
+}
+
+thead tr {
+  display: flex;
+  gap: 1rem;
+  border: 1px solid rgba(248, 248, 255, 0.367);
+  align-items: center;
+  justify-content: space-around;
 }
