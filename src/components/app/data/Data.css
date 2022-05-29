@@ -26,16 +26,18 @@
 
 .searchHeader label {
   font-size: medium;
+  padding: 0 1rem;
 }
 
 .dataTable {
   background-color: #140347f1;
   padding: 1rem 1rem;
+  display: flex;
+  justify-content: center;
 }
 
 .dataTable table {
   justify-content: center;
-  margin: 0 auto;
 }
 
 th {
@@ -59,6 +61,6 @@ tbody tr {
 }
 
 tbody td {
-  padding: 0.2rem;
+  padding: 0 0.3rem;
   text-align: center;
 }
