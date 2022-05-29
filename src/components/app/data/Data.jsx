@@ -39,7 +39,7 @@ function Data() {
 									<td>{subject.firstName}</td>
 									<td>{subject.lastName}</td>
 									<td>{subject.department}</td>
-									<td>{subject.dateOfBirth}</td>
+									<td>{subject.DOB}</td>
 									<td>{subject.startDate}</td>
 									<td>{subject.state}</td>
 									<td>{subject.city}</td>

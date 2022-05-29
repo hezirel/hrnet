@@ -15,11 +15,13 @@ const formShape = [
 ];
 
 const setupDb = async () => {
-	const req = window.indexedDB.open("hrnet");
+
+	const req = window.indexedDB.open("hrnet", 1);
 
 	const p = new Promise((resolve, reject) => {
 
 		req.onupgradeneeded = (event) => {
+			event.preventDefault();
 			const db = event.target.result;
 			const store = db.createObjectStore("subjects", {
 				keyPath: "id",
@@ -33,10 +35,12 @@ const setupDb = async () => {
 		};
 
 		req.onsuccess = (e) => {
+			e.preventDefault();
 			resolve(e.target.result);
 		};
 
 		req.onerror = (e) => {
+			e.preventDefault();
 			console.warn("Error opening database", e);
 			reject();
 		};
@@ -47,19 +51,29 @@ const setupDb = async () => {
 
 const DbAddEntry = (entry) => {
 
-	setupDb().then((db) => {
-		const tx = db.transaction("subjects", "readwrite");
-		const subjectsStore = tx.objectStore("subjects");
+	const p = new Promise((resolve, reject) => {
+		setupDb().then((db) => {
+			const tx = db.transaction("subjects", "readwrite");
+			const subjectsStore = tx.objectStore("subjects");
 
-		subjectsStore.add({
-			...entry,
+			subjectsStore.add({
+				...entry,
+			});
+
+			tx.oncomplete = () => {
+				console.log("Transaction completed");
+				db.close();
+				resolve();
+			};
+
+			tx.onerror = () => {
+				console.warn("Transaction not opened due to error: ");
+				db.close();
+				reject({error: tx.error});
+			};
 		});
-
-		tx.oncomplete = () => {
-			console.log("Transaction completed");
-			db.close();
-		};
 	});
+	return p;
 };
 
 const DbGetEntries = () => {
@@ -85,7 +99,7 @@ const DbGetEntries = () => {
 
 			select.onerror = (event) => {
 				console.warn("Error retrieving entries", event);
-				reject();
+				reject({error: event});
 			};
 		});
 	});

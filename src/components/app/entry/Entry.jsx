@@ -23,13 +23,12 @@ const serialForm = (form) => {
 
 function Entry() {
 
-	const [addSubject, res] = useDbInsertMutation();
+	const [addSubject] = useDbInsertMutation();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		await addSubject(serialForm(event.target));
 		event.target.reset();
-		console.log(res);
 	};
 
 	return (

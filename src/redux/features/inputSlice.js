@@ -13,7 +13,7 @@ const inputSlice = createSlice({
 		addEntry: (state, action) => {
 			state.userForm = action.payload;
 		},
-	}
+	},
 });
 
 export const {

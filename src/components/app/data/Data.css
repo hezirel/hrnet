@@ -24,9 +24,8 @@
 .dataTable table {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 0.8fr 1fr;
+  grid-template-rows: 0.2fr 1fr;
   justify-content: center;
-  align-items: center;
 }
 
 th {
@@ -44,4 +43,20 @@ thead tr {
   border: 1px solid rgba(248, 248, 255, 0.367);
   align-items: center;
   justify-content: space-around;
+}
+
+tbody {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  justify-content: center;
+}
+
+tbody tr {
+  display: flex;
+  gap: 1rem;
+  border: 1px solid rgba(248, 248, 255, 0.367);
+  align-items: center;
+  justify-content: space-around;
+  color: rgb(0, 255, 85);
 }
