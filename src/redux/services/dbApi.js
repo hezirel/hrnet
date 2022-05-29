@@ -70,7 +70,7 @@ const DbAddEntry = (entry) => {
 	return p;
 };
 
-const DbGetEntries = () => {
+const DbGetEntries = (size) => {
 
 	const p = new Promise((resolve, reject) => {
 		setupDb().then((db) => {
@@ -81,7 +81,7 @@ const DbGetEntries = () => {
 	
 			select.openCursor().onsuccess = (event) => {
 				const cursor = event.target.result;
-				if (cursor) {
+				if (cursor && cursor.value.id <= size) {
 					results.push(cursor.value);
 					cursor.continue();
 				} else {

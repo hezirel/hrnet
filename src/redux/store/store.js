@@ -8,6 +8,5 @@ import api from "../services/dbApi";
 export const store = configureStore({
 	reducer,
 	middleware: (getDefaultMiddleware) => 
-		getDefaultMiddleware({
-		}).concat(api.middleware)
+		getDefaultMiddleware().concat(api.middleware)
 });

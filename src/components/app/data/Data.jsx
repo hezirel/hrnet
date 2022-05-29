@@ -1,6 +1,7 @@
 import {
 	React,
 } from "react";
+import { useSelector } from "react-redux";
 
 import {
 	useDbGetQuery,
@@ -10,7 +11,8 @@ import "./Data.css";
 
 function Data() {
 
-	const {data, isError, error} = useDbGetQuery();
+	const size = useSelector((state) => state.table.pageSize);
+	const {data, isError, error} = useDbGetQuery(size);
 
 	return (
 		<div className="dataView">
