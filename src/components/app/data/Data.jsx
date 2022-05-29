@@ -26,7 +26,7 @@ function Data() {
 	const dispatch = useDispatch();
 	const size = useSelector((state) => state.table?.pageSize);
 	const filter = useSelector((state) => state.table?.filter);
-	const {data, isError, error} = useDbGetQuery(size, filter);
+	const {data, isError, error, refetch} = useDbGetQuery(size, filter);
 
 	const handleSize = (event) => {
 		dispatch(pageSize(event.target.value));
@@ -34,6 +34,7 @@ function Data() {
 
 	const handleSearch = (event) => {
 		dispatch(filterSearch(event.target.value));
+		refetch();
 	};
 
 	return (

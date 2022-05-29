@@ -67,9 +67,11 @@ export const dbApi = createApi({
 	endpoints: (build) => ({
 		DbInsert: build.mutation({
 			queryFn: DbAddEntry,
+			invalidatesTags: ["DbGetEntries"],
 		}),
 		DbGet: build.query({
 			queryFn: DbGetEntries,
+			providesTags: ["DbGetEntries"],
 		}),
 	})
 });
