@@ -1,11 +1,18 @@
 import {
 	React,
 } from "react";
-import { useSelector } from "react-redux";
+
+import { 
+	useSelector
+} from "react-redux";
 
 import {
 	useDbGetQuery,
 } from "../../../redux/services/dbApi";
+
+import {
+	pageSize
+} from "../../../redux/features/table/tableSlice";
 
 import "./Data.css";
 
@@ -13,12 +20,20 @@ function Data() {
 
 	const size = useSelector((state) => state.table.pageSize);
 	const {data, isError, error} = useDbGetQuery(size);
+	const handleSize = (e) => {
+		pageSize(e.target.value);
+		console.log(e.target.value);
+	};
 
 	return (
 		<div className="dataView">
 			<div className="dataTitle">
 				<h1>List of current Subjects</h1>
 			</div>
+			<select onChange={handleSize}>
+				<option value="10">10</option>
+				<option value="20">20</option>
+			</select>
 			<div className="dataTable">
 				<table>
 					<thead>
