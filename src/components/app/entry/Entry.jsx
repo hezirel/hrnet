@@ -117,7 +117,13 @@ function Entry() {
 
 						<div>
 							<label htmlFor="state">State</label>
-							<select name="state" id="state" placeholder="NY"></select>
+							<input 
+								name="state"
+								id="state"
+								placeholder="NY"
+								type="text"
+								defaultValue={faker.address.stateAbbr()}
+							></input>
 						</div>
 
 						<div>
@@ -139,13 +145,18 @@ function Entry() {
 						<select 
 							name="department" 
 							id="department"
-							defaultValue={faker.helpers.arrayElement(["Engineering", "Human Resources", "Sales", "Marketing", "Legal"])}
+							defaultValue={faker.helpers.arrayElement([
+								"Engineering",
+								"Human Resources",
+								"Sales",
+								"Marketing",
+								"Legal"])}
 						>
-							<option>Sales</option>
-							<option>Marketing</option>
-							<option>Engineering</option>
-							<option>Human Resources</option>
-							<option>Legal</option>
+							<option value="Sales">Sales</option>
+							<option value="Marketing">Marketing</option>
+							<option value="Engineering">Engineering</option>
+							<option value="Human Resources">Human Resources</option>
+							<option value="Legal">Legal</option>
 						</select>
 					</div>
 					<div>
