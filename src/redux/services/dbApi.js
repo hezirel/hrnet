@@ -16,7 +16,9 @@ const formShape = [
 
 const setupDb = async () => {
 	const req = window.indexedDB.open("hrnet");
+
 	const p = new Promise((resolve, reject) => {
+
 		req.onupgradeneeded = (event) => {
 			const db = event.target.result;
 			const store = db.createObjectStore("subjects", {
@@ -34,8 +36,8 @@ const setupDb = async () => {
 			resolve(e.target.result);
 		};
 
-		req.onerror = () => {
-			reject(req.error);
+		req.onerror = (e) => {
+			reject(e.target);
 		};
 	});
 

@@ -6,6 +6,10 @@ import {
 	useDbInsertMutation,
 } from "../../../redux/services/dbApi";
 
+import { 
+	faker
+} from "@faker-js/faker";
+
 import "./Entry.css";
 
 const serialForm = (form) => {
@@ -19,12 +23,12 @@ const serialForm = (form) => {
 
 function Entry() {
 
-	const [addSubject] = useDbInsertMutation();
+	const [addSubject, res] = useDbInsertMutation();
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		serialForm ? true : false;
 		addSubject(serialForm(event.target));
+		res ? console.log(res) : console.log("no res");
 	};
 
 	return (
@@ -42,8 +46,7 @@ function Entry() {
 							name="firstName"
 							type="text"
 							id="first-name"
-							placeholder="Mario"
-							defaultValue={"mario"}
+							defaultValue={faker.name.firstName()}
 							minLength={3}
 							maxLength={20}
 						/>
@@ -51,29 +54,56 @@ function Entry() {
 
 					<div>
 						<label htmlFor="lastName">Last Name</label>
-						<input type="text" id="lastName" />
+						<input
+							type="text" 
+							id="lastName"
+							name="lastName"
+							defaultValue={faker.name.lastName()}
+						/>
 					</div>
 
 					<div>
 						<label htmlFor="date-of-birth">Date of Birth</label>
-						<input id="date-of-birth" type="text"/>
+						<input 
+							id="date-of-birth" 
+							type="text"
+							name="DOB"
+							defaultValue={faker.date.past().toISOString().substring(0, 10)}
+						/>
 					</div>
 
 					<div>
 						<label htmlFor="start-date">Start Date</label>
-						<input id="start-date" type="text" />
+						<input 
+							id="start-date"
+							type="text"
+							name="startDate"
+							defaultValue={faker.date.past().toISOString().substring(0, 10)}
+						/>
 					</div>
 
 					<fieldset className="addressField">
 
 						<div>
 							<label htmlFor="street">Street</label>
-							<input id="street" type="text" placeholder="123 bis Street Name"/>
+							<input 
+								id="street"
+								type="text"
+								placeholder="123 bis Street Name"
+								name="street"
+								defaultValue={faker.address.streetAddress()}
+							/>
 						</div>
 
 						<div>
 							<label htmlFor="city">City</label>
-							<input id="city" type="text" placeholder="Gotham City"/>
+							<input 
+								id="city"
+								type="text"
+								placeholder="Gotham City"
+								name="city"
+								defaultValue={faker.address.city()}
+							/>
 						</div>
 
 						<div>
@@ -83,7 +113,13 @@ function Entry() {
 
 						<div>
 							<label htmlFor="zip-code">Zip</label>
-							<input id="zip-code" type="number" placeholder="42069"/>
+							<input 
+								id="zip-code"
+								type="number"
+								placeholder="42069"
+								name="zip"
+								defaultValue={faker.address.zipCode("#####")}
+							/>
 						</div>
 
 					</fieldset>
