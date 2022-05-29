@@ -1,7 +1,7 @@
 .dataView {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto 1fr;
 }
 
 .dataTitle {
@@ -16,13 +16,26 @@
   opacity: 0.8;
 }
 
+.searchHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  background-color: #110347;
+  padding: 0 8rem;
+}
+
+.searchHeader label {
+  font-size: medium;
+}
+
 .dataTable {
   background-color: #140347f1;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
 }
 
 .dataTable table {
   justify-content: center;
+  margin: 0 auto;
 }
 
 th {

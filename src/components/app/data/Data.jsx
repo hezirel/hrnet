@@ -35,10 +35,18 @@ function Data() {
 			<div className="dataTitle">
 				<h1>List of current Subjects</h1>
 			</div>
-			<select onChange={handleSize}>
-				<option value="10">10</option>
-				<option value="20">20</option>
-			</select>
+			<div className="searchHeader">
+				<span>
+					<label htmlFor="pageSize">Entries per page:</label>
+					<select onChange={handleSize}>
+						<option value="10">10</option>
+						<option value="25">25</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
+				</span>
+				<input type="text" placeholder="Search" />
+			</div>
 			<div className="dataTable">
 				<table>
 					<thead>
