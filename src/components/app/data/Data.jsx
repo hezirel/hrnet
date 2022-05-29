@@ -50,7 +50,10 @@ function Data() {
 			<div className="searchHeader">
 				<span>
 					<label htmlFor="pageSize">Entries per page:</label>
-					<select onChange={handleSize}>
+					<select 
+						onChange={handleSize}
+						defaultValue={size}
+					>
 						<option value="10">10</option>
 						<option value="25">25</option>
 						<option value="50">50</option>
@@ -60,7 +63,6 @@ function Data() {
 				<input 
 					type="text" 
 					placeholder={filter.length > 2 ? filter : "Search"}
-					value={filter ? filter : null}
 					minLength={3}
 					onChange={handleSearch}
 				/>
