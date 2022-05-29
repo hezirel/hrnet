@@ -56,14 +56,8 @@ const DbAddEntry = (entry) => {
 			const tx = db.transaction("subjects", "readwrite");
 			const subjectsStore = tx.objectStore("subjects");
 
-			subjectsStore.add({
-				...entry,
-			});
-
-			tx.oncomplete = () => {
-				console.log("Transaction completed");
-				db.close();
-				resolve();
+			subjectsStore.add(entry).onsuccess = (event) => {
+				resolve(event.target.result);
 			};
 
 			tx.onerror = () => {
@@ -110,9 +104,7 @@ export const dbApi = createApi({
 	reducerPath: "services/dbApi",
 	endpoints: (build) => ({
 		DbInsert: build.mutation({
-			queryFn: (payload) => {
-				DbAddEntry(payload);
-			}
+			queryFn: DbAddEntry,
 		}),
 		DbGet: build.query({
 			queryFn: DbGetEntries,
