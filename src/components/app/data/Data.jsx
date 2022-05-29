@@ -11,6 +11,7 @@ import {
 } from "../../../redux/services/dbApi";
 
 import {
+	filterSearch,
 	pageSize
 } from "../../../redux/features/table/tableSlice";
 
@@ -22,12 +23,17 @@ import "./Data.css";
 
 function Data() {
 
-	const size = useSelector((state) => state.table.pageSize);
-	const {data, isError, error} = useDbGetQuery(size);
 	const dispatch = useDispatch();
+	const size = useSelector((state) => state.table?.pageSize);
+	const filter = useSelector((state) => state.table?.filter);
+	const {data, isError, error} = useDbGetQuery(size, filter);
 
 	const handleSize = (event) => {
 		dispatch(pageSize(event.target.value));
+	};
+
+	const handleSearch = (event) => {
+		dispatch(filterSearch(event.target.value));
 	};
 
 	return (
@@ -45,7 +51,11 @@ function Data() {
 						<option value="100">100</option>
 					</select>
 				</span>
-				<input type="text" placeholder="Search" />
+				<input 
+					type="text" 
+					placeholder="Search"
+					onChange={handleSearch}
+				/>
 			</div>
 			<div className="dataTable">
 				<table>

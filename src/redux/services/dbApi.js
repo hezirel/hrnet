@@ -2,57 +2,12 @@ import {
 	createApi,
 } from "@reduxjs/toolkit/query/react";
 
-const formShape = [
-	"firstName",
-	"lastName",
-	"department",
-	"dateOfBirth",
-	"startDate",
-	"street",
-	"city",
-	"state",
-	"zipCode",
-];
-
-const setupDb = async () => {
-
-	const req = window.indexedDB.open("hrnet", 1);
-
-	const p = new Promise((resolve, reject) => {
-
-		req.onupgradeneeded = (event) => {
-			event.preventDefault();
-			const db = event.target.result;
-			const store = db.createObjectStore("subjects", {
-				keyPath: "id",
-				autoIncrement: true
-			});
-			formShape.forEach((field) => {
-				store.createIndex(field, field, {
-					unique: false
-				});
-			});
-		};
-
-		req.onsuccess = (e) => {
-			e.preventDefault();
-			resolve(e.target.result);
-		};
-
-		req.onerror = (e) => {
-			e.preventDefault();
-			console.warn("Error opening database", e);
-			reject();
-		};
-	});
-
-	return p;
-};
+import indexDbSetup from "./dbConnect";
 
 const DbAddEntry = (entry) => {
 
 	const p = new Promise((resolve, reject) => {
-		setupDb().then((db) => {
+		indexDbSetup().then((db) => {
 			const tx = db.transaction("subjects", "readwrite");
 			const subjectsStore = tx.objectStore("subjects");
 
@@ -70,27 +25,34 @@ const DbAddEntry = (entry) => {
 	return p;
 };
 
-const DbGetEntries = (size) => {
+const DbGetEntries = (size, filter) => {
 
 	const p = new Promise((resolve, reject) => {
-		setupDb().then((db) => {
+		indexDbSetup().then((db) => {
 			const tx = db.transaction("subjects", "readonly");
 			const select = tx.objectStore("subjects");
+			const query = filter.getState().table.filter;
+			console.log(query);
 	
 			const results = [];
 	
 			select.openCursor().onsuccess = (event) => {
 				const cursor = event.target.result;
-				if (cursor && cursor.value.id <= size) {
-					results.push(cursor.value);
+				if (cursor && cursor.value.id < size) {
+					if (query) {
+						if (cursor.value.firstName.includes(query)) {
+							results.push(cursor.value);
+						}
+					} else {
+						results.push(cursor.value);
+					}
 					cursor.continue();
-				} else {
-					console.log("All entries retrieved");
+				}
+				else {
 					db.close();
 					resolve({data: results});
 				}
 			};
-
 			select.onerror = (event) => {
 				console.warn("Error retrieving entries", event);
 				reject({error: event});
@@ -105,11 +67,9 @@ export const dbApi = createApi({
 	endpoints: (build) => ({
 		DbInsert: build.mutation({
 			queryFn: DbAddEntry,
-			invalidatesTags: ["DbGetEntries"],
 		}),
 		DbGet: build.query({
 			queryFn: DbGetEntries,
-			providesTags: ["DbGetEntries"],
 		}),
 	})
 });

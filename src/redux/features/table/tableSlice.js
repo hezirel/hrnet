@@ -5,7 +5,7 @@ import {
 const initialState = {
 	pageSize: 10,
 	page: 1,
-	filter: "",
+	filter: false,
 	sort: false,
 };
 
@@ -14,15 +14,17 @@ const tableSlice = createSlice({
 	initialState,
 	reducers: {
 		pageSize: (state, action) => {
-			console.log(state);
 			state.pageSize = action.payload;
-			return state;
 		},
+		filterSearch: (state, action) => {
+			state.filter = action.payload;
+		}
 	},
 });
 
 export const {
-	pageSize
+	pageSize,
+	filterSearch
 } = tableSlice.actions;
 
 export default tableSlice.reducer;
