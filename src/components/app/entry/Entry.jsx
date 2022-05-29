@@ -1,15 +1,10 @@
 import {
 	React,
-	useEffect,
 } from "react";
 
 import {
-	useDispatch,
-} from "react-redux";
-
-import {
-	addEntry,
-} from "../../../redux/features/inputSlice";
+	useDbInsertMutation,
+} from "../../../redux/services/dbApi";
 
 import "./Entry.css";
 
@@ -24,20 +19,13 @@ const serialForm = (form) => {
 
 function Entry() {
 
-	const dispatch = useDispatch();
+	const [addSubject] = useDbInsertMutation();
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		dispatch(addEntry(serialForm(event.target)));
+		serialForm ? true : false;
+		addSubject(serialForm(event.target));
 	};
-
-	useEffect(() => {
-		dispatch(addEntry({
-			firstName: "Ezio",
-			lastName: "Papagianni",
-			department: "IT",
-		}));
-	}, []);
 
 	return (
 		<div className="entryView">
