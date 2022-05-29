@@ -59,7 +59,8 @@ function Data() {
 				</span>
 				<input 
 					type="text" 
-					placeholder="Search"
+					placeholder={filter.length > 2 ? filter : "Search"}
+					value={filter ? filter : null}
 					minLength={3}
 					onChange={handleSearch}
 				/>
