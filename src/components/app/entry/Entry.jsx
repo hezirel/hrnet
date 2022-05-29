@@ -25,10 +25,11 @@ function Entry() {
 
 	const [addSubject, res] = useDbInsertMutation();
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-		addSubject(serialForm(event.target));
-		res ? console.log(res) : console.log("no res");
+		await addSubject(serialForm(event.target));
+		event.target.reset();
+		console.log(res);
 	};
 
 	return (
@@ -49,6 +50,7 @@ function Entry() {
 							defaultValue={faker.name.firstName()}
 							minLength={3}
 							maxLength={20}
+							required
 						/>
 					</div>
 
@@ -59,6 +61,9 @@ function Entry() {
 							id="lastName"
 							name="lastName"
 							defaultValue={faker.name.lastName()}
+							minLength={3}
+							maxLength={20}
+							required
 						/>
 					</div>
 
@@ -69,6 +74,7 @@ function Entry() {
 							type="text"
 							name="DOB"
 							defaultValue={faker.date.past().toISOString().substring(0, 10)}
+							required
 						/>
 					</div>
 
@@ -79,6 +85,7 @@ function Entry() {
 							type="text"
 							name="startDate"
 							defaultValue={faker.date.past().toISOString().substring(0, 10)}
+							required
 						/>
 					</div>
 
@@ -92,6 +99,7 @@ function Entry() {
 								placeholder="123 bis Street Name"
 								name="street"
 								defaultValue={faker.address.streetAddress()}
+								required
 							/>
 						</div>
 
@@ -103,6 +111,7 @@ function Entry() {
 								placeholder="Gotham City"
 								name="city"
 								defaultValue={faker.address.city()}
+								required
 							/>
 						</div>
 
@@ -119,6 +128,7 @@ function Entry() {
 								placeholder="42069"
 								name="zip"
 								defaultValue={faker.address.zipCode("#####")}
+								required
 							/>
 						</div>
 
@@ -126,7 +136,11 @@ function Entry() {
 
 					<div>
 						<label htmlFor="department">Department</label>
-						<select name="department" id="department">
+						<select 
+							name="department" 
+							id="department"
+							defaultValue={faker.helpers.arrayElement(["Engineering", "Human Resources", "Sales", "Marketing", "Legal"])}
+						>
 							<option>Sales</option>
 							<option>Marketing</option>
 							<option>Engineering</option>

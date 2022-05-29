@@ -37,7 +37,8 @@ const setupDb = async () => {
 		};
 
 		req.onerror = (e) => {
-			reject(e.target);
+			console.warn("Error opening database", e);
+			reject();
 		};
 	});
 
