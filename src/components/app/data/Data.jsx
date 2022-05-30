@@ -3,6 +3,7 @@ import {
 } from "react";
 
 import { 
+	useDispatch,
 	useSelector
 } from "react-redux";
 
@@ -14,10 +15,6 @@ import {
 	filterSearch,
 	pageSize
 } from "../../../redux/features/table/tableSlice";
-
-import {
-	useDispatch
-} from "react-redux";
 
 import "./Data.css";
 
