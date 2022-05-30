@@ -2,13 +2,15 @@ import {
 	React,
 } from "react";
 
+import { 
+	faker
+} from "@faker-js/faker";
+
 import {
 	useDbInsertMutation,
 } from "../../../redux/services/dbApi";
 
-import { 
-	faker
-} from "@faker-js/faker";
+import Modal from "./Modal";
 
 import "./Entry.css";
 
@@ -28,11 +30,13 @@ function Entry() {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		await addSubject(serialForm(event.target));
+		document.querySelector(".modalOverlay").classList.add("show");
 		event.target.reset();
 	};
 
 	return (
 		<div className="entryView">
+			<Modal />
 			<div className="entryTitle">
 				<h1>Add a subject to database</h1>
 			</div>

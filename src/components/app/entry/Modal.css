@@ -1,0 +1,57 @@
+.modalOverlay {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+
+.confirmModal {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0.2fr;
+    gap: 1rem;
+    background-color: #110347;
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 1rem;
+    color: rgb(0, 255, 85);
+    outline: solid 1px ghostwhite;
+    font-family: "Menlo";
+}
+
+.confirmModal h2 {
+    margin: 0;
+    font-size: xx-large;
+}
+
+.modalHeader {
+    grid-column: 1;
+    grid-row: 2;
+    font-weight: bold;
+    text-align: center;
+    outline: solid 1px ghostwhite;
+    padding: 0.8rem 0.3rem;
+    margin: auto;
+}
+
+.modalHeader button {
+    background-color: transparent;
+    border: none;
+    color: rgb(255, 0, 0);
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+}
+
+.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
