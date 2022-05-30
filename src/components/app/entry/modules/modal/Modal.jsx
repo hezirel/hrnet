@@ -1,17 +1,31 @@
 import React from "react";
 
+import {
+	useDispatch,
+	useSelector,
+} from "react-redux";
+
+import {
+	setSuccess
+} from "../../../../../redux/features/inputSlice";
+
 import "./Modal.css";
 
 
 const Modal = () => {
 
+	const dispatch = useDispatch();
+	const mod = useSelector((state) => state.input.success);
+
 	const closeModal = (e) => {
 		e.preventDefault();
-		document.querySelector(".modalOverlay").classList.remove("show");
+		dispatch(setSuccess(false));
 	};
 
 	return (
-		<div className="modalOverlay">
+		<div className={"modalOverlay" + (
+			mod ? " show" : ""
+		)}>
 			<div className="confirmModal">
 				<h2>Successfully added subject to database</h2>
 				<div className="modalHeader">

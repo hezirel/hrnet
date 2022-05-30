@@ -7,10 +7,18 @@ import {
 } from "@faker-js/faker";
 
 import {
+	useDispatch,
+} from "react-redux";
+
+import {
 	useDbInsertMutation,
 } from "../../../redux/services/dbApi";
 
-import Modal from "./Modal";
+import Modal from "./modules/modal/Modal";
+
+import {
+	setSuccess
+} from "../../../redux/features/inputSlice";
 
 import "./Entry.css";
 
@@ -26,11 +34,12 @@ const serialForm = (form) => {
 function Entry() {
 
 	const [addSubject] = useDbInsertMutation();
+	const dispatch = useDispatch();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		await addSubject(serialForm(event.target));
-		document.querySelector(".modalOverlay").classList.add("show");
+		dispatch(setSuccess(true));
 		event.target.reset();
 	};
 
