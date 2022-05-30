@@ -1,31 +1,18 @@
 import React from "react";
 
-import {
-	useDispatch,
-	useSelector,
-} from "react-redux";
-
-import {
-	setSuccess
-} from "../../../../../redux/features/inputSlice";
+import { PropTypes } from "prop-types";
 
 import "./Modal.css";
 
-
-const Modal = () => {
-
-	const dispatch = useDispatch();
-	const mod = useSelector((state) => state.input.success);
+const Modal = ({ handleState }) => {
 
 	const closeModal = (e) => {
 		e.preventDefault();
-		dispatch(setSuccess(false));
+		handleState(false);
 	};
 
 	return (
-		<div className={"modalOverlay" + (
-			mod ? " show" : ""
-		)}>
+		<div className="modalOverlay show">
 			<div className="confirmModal">
 				<h2>Successfully added subject to database</h2>
 				<div className="modalHeader">
@@ -34,6 +21,10 @@ const Modal = () => {
 			</div>
 		</div>
 	);
+};
+
+Modal.propTypes = {
+	handleState: PropTypes.func.isRequired,
 };
 
 export default Modal;

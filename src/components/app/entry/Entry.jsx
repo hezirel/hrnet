@@ -1,5 +1,6 @@
 import {
 	React,
+	useState,
 } from "react";
 
 import { 
@@ -7,19 +8,11 @@ import {
 } from "@faker-js/faker";
 
 import {
-	useDispatch,
-} from "react-redux";
-
-import {
 	useDbInsertMutation,
 } from "../../../redux/services/dbApi";
 
 import Modal from "./modules/modal/Modal";
 import Select from "./modules/select/Select";
-
-import {
-	setSuccess
-} from "../../../redux/features/inputSlice";
 
 import "./Entry.css";
 
@@ -35,18 +28,17 @@ const serialForm = (form) => {
 function Entry() {
 
 	const [addSubject] = useDbInsertMutation();
-	const dispatch = useDispatch();
+	const [modal, setModal] = useState(false);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		await addSubject(serialForm(event.target));
-		dispatch(setSuccess(true));
-		event.target.reset();
+		setModal(true);
 	};
 
 	return (
 		<div className="entryView">
-			<Modal />
+			{modal && <Modal handleState={setModal} />}
 			<div className="entryTitle">
 				<h1>Add a subject to database</h1>
 			</div>
