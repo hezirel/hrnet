@@ -11,7 +11,9 @@ import {
 	useDbInsertMutation,
 } from "../../../redux/services/dbApi";
 
-import Modal from "./modules/modal/Modal";
+import {
+	Modal,
+} from "ezirel-oc-modal";
 import Select from "./modules/select/Select";
 
 import "./Entry.css";
@@ -34,6 +36,7 @@ function Entry() {
 		event.preventDefault();
 		await addSubject(serialForm(event.target));
 		setModal(true);
+		event.target.reset();
 	};
 
 	return (
