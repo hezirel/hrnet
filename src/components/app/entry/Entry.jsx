@@ -15,6 +15,7 @@ import {
 } from "../../../redux/services/dbApi";
 
 import Modal from "./modules/modal/Modal";
+import Select from "./modules/select/Select";
 
 import {
 	setSuccess
@@ -129,13 +130,7 @@ function Entry() {
 
 						<div>
 							<label htmlFor="state">State</label>
-							<input 
-								name="state"
-								id="state"
-								placeholder="NY"
-								type="text"
-								defaultValue={faker.address.stateAbbr()}
-							></input>
+							<Select />
 						</div>
 
 						<div>

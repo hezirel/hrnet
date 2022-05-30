@@ -69,7 +69,6 @@ input {
   justify-self: center;
 }
 
-
 .entryForm button {
   grid-column-start: 1;
   grid-column-end: 3;
