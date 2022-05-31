@@ -1,18 +1,39 @@
-import React from "react";
+import {
+	React,
+	useState,
+} from "react";
+
+import { 
+	faker
+} from "@faker-js/faker";
+
+import PropTypes from "prop-types";
 
 import "./Datepick.css";
 
-const Datepick = () => {
+const Datepick = ({ field = "dob"}) => {
+
+	const baseDate = (start = (
+		field === "dob" ? 
+			faker.date.birthdate : faker.date.future
+	)) => start().toISOString().substring(0, 10);
+	const [startDate, setStartDate] = useState(baseDate);
+	startDate ? true : false;
+
 	return (
-		<select 
-			name="Datepick"
-			id="dobpick"
-			placeholder="11-11-2011"
-			type="date">
-			<option value="11-11-2012">11-11-2012</option>
-			<option value="10-09-2014">10-09-2014</option>
-		</select>
+		<input
+			type="date"
+			name={field}
+			defaultValue={baseDate()}
+			onChange={(e) => setStartDate(new Date(e.target.value))}
+			required
+		>
+		</input>
 	);
+};
+
+Datepick.propTypes = {
+	field: PropTypes.string.isRequired
 };
 
 export default Datepick;

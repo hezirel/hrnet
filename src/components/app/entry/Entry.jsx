@@ -7,13 +7,15 @@ import {
 	faker
 } from "@faker-js/faker";
 
-import {
-	useDbInsertMutation,
-} from "../../../redux/services/dbApi";
+import Datepick from "./modules/datepick/Datepick";
 
 import {
 	Modal,
 } from "ezirel-oc-modal";
+
+import {
+	useDbInsertMutation,
+} from "../../../redux/services/dbApi";
 
 import Select from "./modules/select/Select";
 
@@ -102,23 +104,15 @@ function Entry() {
 
 					<div>
 						<label htmlFor="date-of-birth">Date of Birth</label>
-						<input 
-							id="date-of-birth" 
-							type="text"
-							name="DOB"
-							defaultValue={faker.date.past().toISOString().substring(0, 10)}
-							required
+						<Datepick 
+							field="dob"
 						/>
 					</div>
 
 					<div>
 						<label htmlFor="start-date">Start Date</label>
-						<input 
-							id="start-date"
-							type="text"
-							name="startDate"
-							defaultValue={faker.date.past().toISOString().substring(0, 10)}
-							required
+						<Datepick 
+							field="startDate"
 						/>
 					</div>
 
