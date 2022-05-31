@@ -14,6 +14,7 @@ import {
 import {
 	Modal,
 } from "ezirel-oc-modal";
+
 import Select from "./modules/select/Select";
 
 import "./Entry.css";
@@ -41,7 +42,16 @@ function Entry() {
 
 	return (
 		<div className="entryView">
-			{modal && <Modal handleState={setModal} />}
+			{modal && 
+				<Modal>
+					<div className="confirmModal">
+						<h2>Successfully added subject to database</h2>
+						<div className="modalHeader">
+							<button onClick={() => setModal(false)}>Close this dialog</button>
+						</div>
+					</div>
+				</Modal>
+			}
 			<div className="entryTitle">
 				<h1>Add a subject to database</h1>
 			</div>
