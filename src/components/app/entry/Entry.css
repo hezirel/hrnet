@@ -80,3 +80,7 @@ input {
   background-color: #110347;
   width: 75%;
 }
+
+#modalClose:focus {
+  outline: rgb(0, 255, 85) solid 1px;
+}

@@ -46,11 +46,17 @@ function Entry() {
 					<Modal>
 						<div className="confirmModal">
 							<h2>Successfully added subject to database</h2>
-							<div className="modalHeader">
-								<button onClick={() => {
-									setModal(false);
-									form.reset();
-								}}>
+							<div 
+								className="modalHeader"
+							>
+								<button 
+									id="modalClose"
+									onClick={() => {
+										setModal(false);
+										form.reset();
+									}}
+									autoFocus
+								>
 									Close this dialog
 								</button>
 							</div>
