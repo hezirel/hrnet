@@ -55,12 +55,12 @@ function Data() {
 						{
 							data && <DataTable data={data} />
 						}
-						{
-							isError && (
-								<tr>
-									<td colSpan="10">Error: {error.message}</td>
-								</tr>
-							)
+						{isError && 
+								(
+									<tr>
+										<td colSpan="10">Error: {error.message}</td>
+									</tr>
+								)
 						}
 					</tbody>
 				</table>

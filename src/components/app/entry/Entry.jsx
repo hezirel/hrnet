@@ -37,7 +37,6 @@ function Entry() {
 		event.preventDefault();
 		await addSubject(serialForm(event.target));
 		setModal(true);
-		event.target.reset();
 	};
 
 	return (
@@ -47,7 +46,9 @@ function Entry() {
 						<div className="confirmModal">
 							<h2>Successfully added subject to database</h2>
 							<div className="modalHeader">
-								<button onClick={() => setModal(false)}>Close this dialog</button>
+								<button onClick={() => setModal(false)}>
+									Close this dialog
+								</button>
 							</div>
 						</div>
 					</Modal>
