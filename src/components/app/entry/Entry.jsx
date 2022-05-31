@@ -32,6 +32,7 @@ function Entry() {
 
 	const [addSubject] = useDbInsertMutation();
 	const [modal, setModal] = useState(false);
+	const form = document.getElementById("entryForm");
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -46,7 +47,10 @@ function Entry() {
 						<div className="confirmModal">
 							<h2>Successfully added subject to database</h2>
 							<div className="modalHeader">
-								<button onClick={() => setModal(false)}>
+								<button onClick={() => {
+									setModal(false);
+									form.reset();
+								}}>
 									Close this dialog
 								</button>
 							</div>
@@ -58,7 +62,11 @@ function Entry() {
 			</div>
 			<div className="entryFormContainer">
 
-				<form className="entryForm" onSubmit={handleSubmit} >
+				<form
+					className="entryForm"
+					onSubmit={handleSubmit}
+					id="entryForm"
+				>
 
 					<div>
 						<label htmlFor="first-name">First Name</label>
