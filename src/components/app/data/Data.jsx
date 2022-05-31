@@ -2,42 +2,16 @@ import {
 	React,
 } from "react";
 
-import { 
-	useDispatch,
-	useSelector
-} from "react-redux";
-
 import {
 	useDbGetQuery,
 } from "../../../redux/services/dbApi";
 
-import {
-	filterSearch,
-	pageSize
-} from "../../../redux/features/table/tableSlice";
-
 import "./Data.css";
+import DataTable from "./DataTable";
 
 function Data() {
 
-	const dispatch = useDispatch();
-	const size = useSelector((state) => state.table?.pageSize);
-	const filter = useSelector((state) => state.table?.filter);
-	const {data, isError, error, refetch} = useDbGetQuery(size, filter);
-
-	const handleSize = (event) => {
-		dispatch(pageSize(event.target.value));
-	};
-
-	const handleSearch = (event) => {
-		if (event.target.value.length > 2) {
-			dispatch(filterSearch(event.target.value));
-			refetch();
-		} else {
-			dispatch(filterSearch(false));
-			refetch();
-		}
-	};
+	const {data, isError, error} = useDbGetQuery();
 
 	return (
 		<div className="dataView">
@@ -48,8 +22,7 @@ function Data() {
 				<span>
 					<label htmlFor="pageSize">Entries per page:</label>
 					<select 
-						onChange={handleSize}
-						defaultValue={size}
+						defaultValue={10}
 					>
 						<option value="10">10</option>
 						<option value="25">25</option>
@@ -59,9 +32,8 @@ function Data() {
 				</span>
 				<input 
 					type="text" 
-					placeholder={filter.length > 2 ? filter : "Search"}
+					placeholder={"Search"}
 					minLength={3}
-					onChange={handleSearch}
 				/>
 			</div>
 			<div className="dataTable">
@@ -81,19 +53,7 @@ function Data() {
 					</thead>
 					<tbody>
 						{
-							data && data.map(subject => (
-								<tr key={subject.id}>
-									<td>{subject.firstName}</td>
-									<td>{subject.lastName}</td>
-									<td>{subject.department}</td>
-									<td>{subject.DOB}</td>
-									<td>{subject.startDate}</td>
-									<td>{subject.state}</td>
-									<td>{subject.city}</td>
-									<td>{subject.street}</td>
-									<td>{subject.zip}</td>
-								</tr>
-							))
+							data && <DataTable data={data} />
 						}
 						{
 							isError && (

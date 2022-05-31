@@ -25,31 +25,21 @@ const DbAddEntry = (entry) => {
 	return p;
 };
 
-const DbGetEntries = (size, filter) => {
+const DbGetEntries = () => {
 
 	const p = new Promise((resolve, reject) => {
 		indexDbSetup().then((db) => {
 			const tx = db.transaction("subjects", "readonly");
 			const select = tx.objectStore("subjects");
-			const query = filter.getState().table.filter;
 	
 			const results = [];
 	
 			select.openCursor().onsuccess = (event) => {
 				const cursor = event.target.result;
-				if (cursor && cursor.value.id < size) {
-					if (query) {
-						Object.values(cursor.value).forEach((value) => {
-							if (value.toString().toLowerCase().includes(query.toLowerCase())) {
-								results.push(cursor.value);
-							}
-						});
-					} else {
-						results.push(cursor.value);
-					}
+				if (cursor) {
+					results.push(cursor.value);
 					cursor.continue();
-				}
-				else {
+				} else {
 					db.close();
 					resolve({data: results});
 				}

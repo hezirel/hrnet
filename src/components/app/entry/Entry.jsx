@@ -42,15 +42,15 @@ function Entry() {
 
 	return (
 		<div className="entryView">
-			{modal && 
-				<Modal>
-					<div className="confirmModal">
-						<h2>Successfully added subject to database</h2>
-						<div className="modalHeader">
-							<button onClick={() => setModal(false)}>Close this dialog</button>
+			{ modal && 
+					<Modal>
+						<div className="confirmModal">
+							<h2>Successfully added subject to database</h2>
+							<div className="modalHeader">
+								<button onClick={() => setModal(false)}>Close this dialog</button>
+							</div>
 						</div>
-					</div>
-				</Modal>
+					</Modal>
 			}
 			<div className="entryTitle">
 				<h1>Add a subject to database</h1>
