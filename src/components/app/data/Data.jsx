@@ -15,6 +15,7 @@ function Data() {
 	const {data, isError, error} = useDbGetQuery();
 	const [activePage, setActivePage] = useState(1);
 	const [itemsPerPage, setItemsPerPage] = useState(10);
+	const [filter, setFilter] = useState("");
 
 	return (
 		<div className="dataView">
@@ -38,6 +39,8 @@ function Data() {
 					type="text" 
 					placeholder={"Search"}
 					minLength={3}
+					value={filter}
+					onChange={(e) => setFilter(e.target.value)}
 				/>
 			</div>
 			<div className="dataTable">
@@ -57,7 +60,14 @@ function Data() {
 					</thead>
 					<tbody>
 						{
-							data && <DataTable data={data} />
+							data && <DataTable data={
+								filter.length > 2 ?
+									data.filter(subject => 
+										Object.entries(subject).some(entry => 
+											typeof(entry[1]) === "string" && 
+												entry[1].toLowerCase().includes(filter.toLowerCase())))
+									: 
+									data } />
 						}
 						{isError && 
 								(
