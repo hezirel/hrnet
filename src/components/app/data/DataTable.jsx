@@ -12,7 +12,13 @@ const DataTable = ({ data }) => {
 	const [activePage, setActivePage] = useState(1);
 	const [itemsPerPage, setItemsPerPage] = useState(10);
 	const [filter, setFilter] = useState("");
-	const totalLength = data && Math.ceil(data.length / itemsPerPage);
+	const query = filter.length > 2 ?
+		(data.filter(subject => 
+			Object.entries(subject).some(entry => 
+				typeof(entry[1]) === "string" && 
+				entry[1].toLowerCase().includes(filter.toLowerCase())))) :
+		data;
+	const totalLength = Math.ceil(query.length / itemsPerPage);
 
 	return (
 		<>
@@ -23,10 +29,12 @@ const DataTable = ({ data }) => {
 						defaultValue={itemsPerPage}
 						onChange={(e) => setItemsPerPage(e.target.value)}
 					>
-						<option value="10">10</option>
-						<option value="25">25</option>
-						<option value="50">50</option>
-						<option value="100">100</option>
+						{
+							["10", "25", "50", "100"].map(value => {
+								return parseInt(value) <= query.length &&
+									<option key={value} value={value}>{value}</option>;
+							})
+						}
 					</select>
 				</span>
 				<input 
@@ -54,15 +62,7 @@ const DataTable = ({ data }) => {
 					</thead>
 					<tbody>
 						{
-							filter.length > 2 ? 
-								<Rows data={
-									(data.filter(subject => 
-										Object.entries(subject).some(entry => 
-											typeof(entry[1]) === "string" && 
-												entry[1].toLowerCase().includes(filter.toLowerCase()))))
-								}/>
-								: 
-								<Rows data={data.slice((activePage - 1) * itemsPerPage, activePage * itemsPerPage)}/>
+							<Rows data={query.slice((activePage - 1) * itemsPerPage, activePage * itemsPerPage)}/>
 						}
 					</tbody>
 				</table>
@@ -82,7 +82,7 @@ const DataTable = ({ data }) => {
 					</select>
 				</span>
 				<span>
-				Showing entries {(activePage - 1) * itemsPerPage + 1} to {activePage * itemsPerPage} of {data && data.length}
+				Showing entries {(activePage - 1) * itemsPerPage + 1} to {(activePage * itemsPerPage) > query.length ? query.length : (activePage * itemsPerPage)} of {query && query.length}
 				</span>
 			</div>
 		</>
