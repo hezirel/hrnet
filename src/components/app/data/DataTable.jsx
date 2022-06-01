@@ -1,9 +1,20 @@
 import {
 	React,
-	useState,
 } from "react";
 
+import { 
+	useSelector,
+	useDispatch,
+} from "react-redux";
+
 import PropTypes from "prop-types";
+
+import {
+	pageSize,
+	filterSearch,
+	changePage,
+	sortColumn,
+} from "../../../redux/features/table/tableSlice";
 
 import Rows from "./Rows";
 
@@ -52,13 +63,12 @@ const columns = [
 
 const DataTable = ({ data }) => {
 
-	const [activePage, setActivePage] = useState(1);
-	const [itemsPerPage, setItemsPerPage] = useState(10);
-	const [filter, setFilter] = useState("");
-	const [sort, setSort] = useState({
-		column: "id",
-		order: 1,
-	});
+	const dispatch = useDispatch();
+	const activePage = useSelector(state => state.table.activePage);
+	const itemsPerPage = useSelector(state => state.table.itemsPerPage);
+	const filter = useSelector(state => state.table.filter);
+	const sort = useSelector(state => state.table.sortOrder);
+
 	// If a filter is set, filter data
 	const filtered = filter.length > 2 ?
 		(data.filter(subject => 
@@ -66,6 +76,7 @@ const DataTable = ({ data }) => {
 				typeof(entry[1]) === "string" && 
 				entry[1].toLowerCase().includes(filter.toLowerCase())))) :
 		data;
+
 	// Sort data
 	const query = [...filtered].sort((a, b) => {
 		if (a[sort.column] < b[sort.column]) {
@@ -87,11 +98,10 @@ const DataTable = ({ data }) => {
 				<span>
 					<label htmlFor="pageSize">Entries per page:</label>
 					<select 
-						defaultValue={itemsPerPage}
 						// Return to first page if current activePage out of new itemsPerPage range
-						onChange={(e) => {
-							setItemsPerPage(parseInt(e.target.value));
-							setActivePage(1);
+						onSelect={(e) => {
+							dispatch(pageSize(e));
+							dispatch(changePage(1));
 						}}
 					>
 						{
@@ -107,8 +117,9 @@ const DataTable = ({ data }) => {
 					type="text" 
 					placeholder={"Search"}
 					minLength={3}
-					value={filter}
-					onChange={(e) => setFilter(e.target.value)}
+					onChange={(e) => {
+						dispatch(filterSearch(e.target.value));
+					}}
 				/>
 			</div>
 			<div className="dataTable">
@@ -120,10 +131,10 @@ const DataTable = ({ data }) => {
 									<th
 										key={column.dataIndex}
 										onClick={() => {
-											setSort({
+											dispatch(sortColumn({
 												column: column.dataIndex,
 												order: sort.column === column.dataIndex ? -sort.order : 1,
-											});
+											}));
 										}}
 										style={sort.column === column.dataIndex ? {
 											color: sort.order === 1 ? "green" : "red",
@@ -147,7 +158,7 @@ const DataTable = ({ data }) => {
 					<label htmlFor="pageNum">Page:</label>
 					<select
 						defaultValue={activePage}
-						onChange={(e) => setActivePage(e.target.value)}
+						onChange={(e) => dispatch(changePage(e.target.value))}
 					>
 						{
 							/* Adjust select to fit real numbers of page */
