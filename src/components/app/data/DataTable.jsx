@@ -30,6 +30,7 @@ const DataTable = ({ data }) => {
 					<label htmlFor="pageSize">Entries per page:</label>
 					<select 
 						defaultValue={itemsPerPage}
+						// Return to first page if current activePage out of new itemsPerPage range
 						onChange={(e) => {
 							setItemsPerPage(parseInt(e.target.value));
 							setActivePage(1);
