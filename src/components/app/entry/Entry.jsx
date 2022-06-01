@@ -8,6 +8,9 @@ import {
 } from "@faker-js/faker";
 
 import Datepick from "./modules/datepick/Datepick";
+import Select from "./modules/select/Select";
+import departments from "./modules/select/departments";
+import states from "./modules/select/states";
 
 import {
 	Modal,
@@ -16,8 +19,6 @@ import {
 import {
 	useDbInsertMutation,
 } from "../../../redux/services/dbApi";
-
-import Select from "./modules/select/Select";
 
 import "./Entry.css";
 
@@ -144,7 +145,10 @@ function Entry() {
 
 						<div>
 							<label htmlFor="state">State</label>
-							<Select />
+							<Select
+								label="state"
+								list={states}
+							/>
 						</div>
 
 						<div>
@@ -163,22 +167,10 @@ function Entry() {
 
 					<div>
 						<label htmlFor="department">Department</label>
-						<select 
-							name="department" 
-							id="department"
-							defaultValue={faker.helpers.arrayElement([
-								"Engineering",
-								"Human Resources",
-								"Sales",
-								"Marketing",
-								"Legal"])}
-						>
-							<option value="Sales">Sales</option>
-							<option value="Marketing">Marketing</option>
-							<option value="Engineering">Engineering</option>
-							<option value="Human Resources">Human Resources</option>
-							<option value="Legal">Legal</option>
-						</select>
+						<Select 
+							label="department"
+							list={departments}
+						/>
 					</div>
 					<div>
 						<button type="submit">Save</button>
