@@ -1,5 +1,6 @@
 import {
 	React,
+	useState,
 } from "react";
 
 import {
@@ -12,6 +13,8 @@ import DataTable from "./DataTable";
 function Data() {
 
 	const {data, isError, error} = useDbGetQuery();
+	const [activePage, setActivePage] = useState(1);
+	const [itemsPerPage, setItemsPerPage] = useState(10);
 
 	return (
 		<div className="dataView">
@@ -22,7 +25,8 @@ function Data() {
 				<span>
 					<label htmlFor="pageSize">Entries per page:</label>
 					<select 
-						defaultValue={10}
+						defaultValue={itemsPerPage}
+						onChange={(e) => setItemsPerPage(e.target.value)}
 					>
 						<option value="10">10</option>
 						<option value="25">25</option>
@@ -64,6 +68,21 @@ function Data() {
 						}
 					</tbody>
 				</table>
+			</div>
+			<div className="tableFooter">
+				<span>
+					<label htmlFor="pageSize">Page:</label>
+					<select
+						defaultValue={activePage}
+						onChange={(e) => setActivePage(e.target.value)}
+					>
+						<option value="1">1</option>
+						<option value="2">2</option>
+					</select>
+				</span>
+				<span>
+						Showing entries {(activePage - 1) * itemsPerPage + 1} to {activePage * itemsPerPage} of {data && data.length}
+				</span>
 			</div>
 		</div>
 	);

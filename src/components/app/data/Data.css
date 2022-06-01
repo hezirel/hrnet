@@ -1,14 +1,14 @@
 .dataView {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto auto 1fr auto;
 }
 
 .dataTitle {
   background-color: #110347;
 }
 
-.dataTitle h1 {
+.dataTitle h1, span {
   font-family: "Menlo";
   text-align: center;
   color: ghostwhite;
@@ -63,4 +63,12 @@ tbody tr {
 tbody td {
   padding: 0 0.3rem;
   text-align: center;
+}
+
+.tableFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #110347;
+  padding: 0.5rem 3rem;
 }
