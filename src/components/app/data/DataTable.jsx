@@ -10,7 +10,6 @@ import {
 import PropTypes from "prop-types";
 
 import {
-	
 	changePage,
 	sortColumn,
 } from "../../../redux/features/table/tableSlice";
