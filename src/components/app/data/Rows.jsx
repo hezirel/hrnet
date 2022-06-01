@@ -4,6 +4,7 @@ const Rows = ({data}) => {
 	return (
 		data.map(subject => (
 			<tr key={subject.id}>
+				<td>{subject.id}</td>
 				<td>{subject.firstName}</td>
 				<td>{subject.lastName}</td>
 				<td>{subject.department}</td>
