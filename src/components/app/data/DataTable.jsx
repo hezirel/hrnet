@@ -125,6 +125,9 @@ const DataTable = ({ data }) => {
 												order: sort.column === column.dataIndex ? -sort.order : 1,
 											});
 										}}
+										style={sort.column === column.dataIndex ? {
+											color: sort.order === 1 ? "green" : "red",
+										} : {}}
 									>
 										{column.title}
 									</th>
