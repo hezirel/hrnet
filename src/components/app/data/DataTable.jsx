@@ -12,13 +12,16 @@ const DataTable = ({ data }) => {
 	const [activePage, setActivePage] = useState(1);
 	const [itemsPerPage, setItemsPerPage] = useState(10);
 	const [filter, setFilter] = useState("");
+	// If a filter is set, filter data
 	const query = filter.length > 2 ?
 		(data.filter(subject => 
 			Object.entries(subject).some(entry => 
 				typeof(entry[1]) === "string" && 
 				entry[1].toLowerCase().includes(filter.toLowerCase())))) :
 		data;
+	// Total number of pages from data.length / itermPerPage
 	const totalLength = Math.ceil(query.length / itemsPerPage);
+	const pages = Array.from(Array(totalLength).keys());
 
 	return (
 		<>
@@ -30,6 +33,7 @@ const DataTable = ({ data }) => {
 						onChange={(e) => setItemsPerPage(e.target.value)}
 					>
 						{
+							/* Adjust items per page options to query length rounded down to previous step*/
 							["10", "25", "50", "100"].map(value => {
 								return parseInt(value) <= query.length &&
 									<option key={value} value={value}>{value}</option>;
@@ -69,20 +73,21 @@ const DataTable = ({ data }) => {
 			</div>
 			<div className="tableFooter">
 				<span>
-					<label htmlFor="pageSize">Page:</label>
+					<label htmlFor="pageNum">Page:</label>
 					<select
 						defaultValue={activePage}
 						onChange={(e) => setActivePage(e.target.value)}
 					>
 						{
-							Array.from(Array(totalLength).keys()).map(page => (
+							/* Adjust select to fit real numbers of page */
+							pages.map(page => (
 								<option key={page + 1} value={page + 1}>{page + 1}</option>
 							))
 						}
 					</select>
 				</span>
 				<span>
-				Showing entries {(activePage - 1) * itemsPerPage + 1} to {(activePage * itemsPerPage) > query.length ? query.length : (activePage * itemsPerPage)} of {query && query.length}
+					Showing entries {(activePage - 1) * itemsPerPage + 1} to {(activePage * itemsPerPage) > query.length ? query.length : (activePage * itemsPerPage)} of {query && query.length}
 				</span>
 			</div>
 		</>
