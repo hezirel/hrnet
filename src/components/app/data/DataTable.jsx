@@ -30,7 +30,10 @@ const DataTable = ({ data }) => {
 					<label htmlFor="pageSize">Entries per page:</label>
 					<select 
 						defaultValue={itemsPerPage}
-						onChange={(e) => setItemsPerPage(e.target.value)}
+						onChange={(e) => {
+							setItemsPerPage(parseInt(e.target.value));
+							setActivePage(1);
+						}}
 					>
 						{
 							/* Adjust items per page options to query length rounded down to previous step*/
