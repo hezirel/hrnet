@@ -10,13 +10,13 @@ import {
 import PropTypes from "prop-types";
 
 import {
-	pageSize,
-	filterSearch,
+	
 	changePage,
 	sortColumn,
 } from "../../../redux/features/table/tableSlice";
 
 import Rows from "./Rows";
+import DataHeader from "./modules/DataHeader";
 
 const columns = [
 	{
@@ -94,34 +94,7 @@ const DataTable = ({ data }) => {
 
 	return (
 		<>
-			<div className="searchHeader">
-				<span>
-					<label htmlFor="pageSize">Entries per page:</label>
-					<select 
-						// Return to first page if current activePage out of new itemsPerPage range
-						onSelect={(e) => {
-							dispatch(pageSize(e));
-							dispatch(changePage(1));
-						}}
-					>
-						{
-							/* Adjust items per page options to query length rounded down to previous step*/
-							["10", "25", "50", "100"].map((value, i) => {
-								return ((parseInt(value) <= query.length) || (i === 0)) &&
-									<option key={value} value={value}>{value}</option>;
-							})
-						}
-					</select>
-				</span>
-				<input 
-					type="text" 
-					placeholder={"Search"}
-					minLength={3}
-					onChange={(e) => {
-						dispatch(filterSearch(e.target.value));
-					}}
-				/>
-			</div>
+			<DataHeader querySize={query.length} />
 			<div className="dataTable">
 				<table>
 					<thead>

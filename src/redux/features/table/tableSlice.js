@@ -17,7 +17,7 @@ const tableSlice = createSlice({
 	initialState,
 	reducers: {
 		pageSize: (state, action) => {
-			state.itemsPerPage = action.payload.target.value;
+			state.itemsPerPage = action.payload;
 		},
 		filterSearch: (state, action) => {
 			state.filter = action.payload;
