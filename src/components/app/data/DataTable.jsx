@@ -106,8 +106,8 @@ const DataTable = ({ data }) => {
 					>
 						{
 							/* Adjust items per page options to query length rounded down to previous step*/
-							["10", "25", "50", "100"].map(value => {
-								return parseInt(value) <= query.length &&
+							["10", "25", "50", "100"].map((value, i) => {
+								return ((parseInt(value) <= query.length) || (i === 0)) &&
 									<option key={value} value={value}>{value}</option>;
 							})
 						}
