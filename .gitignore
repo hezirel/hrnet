@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /.chrome
+.env
 
 # testing
 /coverage
