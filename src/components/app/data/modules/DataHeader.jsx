@@ -19,6 +19,7 @@ const DataHeader = ({ querySize }) => {
 
 	const dispatch = useDispatch();
 	const filter = useSelector(state => state.table.filter);
+	const pages = useSelector(state => state.table.pages);
 
 	return (
 		<div className="searchHeader">
@@ -26,6 +27,7 @@ const DataHeader = ({ querySize }) => {
 				<label htmlFor="pageSize">Entries per page:</label>
 				<select 
 					// Return to first page if current activePage out of new itemsPerPage range
+					defaultValue={pages}
 					onChange={(e) => {
 						dispatch(pageSize(e.target.value));
 						dispatch(changePage(1));
