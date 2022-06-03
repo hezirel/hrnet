@@ -1,7 +1,10 @@
-import React from "react";
+import {
+	React,
+} from "react";
 
 import { 
-	useDispatch
+	useDispatch,
+	useSelector,
 } from "react-redux";
 
 import PropTypes from "prop-types";
@@ -15,6 +18,7 @@ import {
 const DataHeader = ({ querySize }) => {
 
 	const dispatch = useDispatch();
+	const filter = useSelector(state => state.table.filter);
 
 	return (
 		<div className="searchHeader">
@@ -40,6 +44,7 @@ const DataHeader = ({ querySize }) => {
 				type="text" 
 				placeholder={"Search"}
 				minLength={3}
+				defaultValue={filter}
 				onChange={(e) => {
 					dispatch(filterSearch(e.target.value));
 				}}
